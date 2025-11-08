@@ -29,9 +29,13 @@ whisk-whisper/
 
 **Git Clone** 
 
-``git clone https://github.com/icodealittle/whisk-whisper.git``
+```bash
+git clone https://github.com/icodealittle/whisk-whisper.git
+```
 
-``cd whisk-whisper``
+```bash
+cd whisk-whisper
+```
 
 ---
 
