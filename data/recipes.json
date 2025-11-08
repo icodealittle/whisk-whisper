@@ -1,0 +1,320 @@
+{
+  "pancakes": {
+    "title": "Fluffy Pancakes",
+    "image": "🥞",
+    "ingredients": [
+      "1½ cups all-purpose flour",
+      "3½ teaspoons baking powder",
+      "1 teaspoon salt",
+      "1 tablespoon white sugar",
+      "1¼ cups milk",
+      "1 egg",
+      "3 tablespoons melted butter"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "In a large bowl, sift together the flour, baking powder, salt and sugar.",
+        "tip": "Sifting helps create lighter, fluffier pancakes by aerating the flour.",
+        "icon": "🥣"
+      },
+      {
+        "number": 2,
+        "instruction": "Make a well in the center and pour in the milk, egg and melted butter. Mix until smooth.",
+        "tip": "Don't overmix! A few lumps are okay and will result in tender pancakes.",
+        "icon": "🥛"
+      },
+      {
+        "number": 3,
+        "instruction": "Heat a lightly oiled griddle or frying pan over medium-high heat.",
+        "tip": "Test if the pan is ready by sprinkling a few drops of water - they should sizzle.",
+        "icon": "🔥"
+      },
+      {
+        "number": 4,
+        "instruction": "Pour or scoop the batter onto the griddle, using approximately ¼ cup for each pancake.",
+        "tip": "Wait for bubbles to form on the surface before flipping - this ensures even cooking.",
+        "icon": "🥞"
+      },
+      {
+        "number": 5,
+        "instruction": "Brown on both sides and serve hot with your favorite toppings.",
+        "tip": "Stack pancakes on a warm plate and cover with foil to keep them hot while cooking the rest.",
+        "icon": "🍽️"
+      }
+    ]
+  },
+  "pasta": {
+    "title": "Creamy Pasta Carbonara",
+    "image": "🍝",
+    "ingredients": [
+      "400g spaghetti",
+      "200g pancetta or guanciale",
+      "4 large eggs",
+      "100g Pecorino Romano cheese",
+      "Black pepper",
+      "Salt"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Bring a large pot of salted water to boil and cook spaghetti according to package directions.",
+        "tip": "Save 1 cup of pasta water before draining - you'll need it for the sauce.",
+        "icon": "💧"
+      },
+      {
+        "number": 2,
+        "instruction": "While pasta cooks, dice the pancetta and cook in a large pan until crispy.",
+        "tip": "No oil needed! The pancetta will release its own fat for cooking.",
+        "icon": "🥓"
+      },
+      {
+        "number": 3,
+        "instruction": "In a bowl, whisk together eggs, grated cheese, and plenty of black pepper.",
+        "tip": "Use room temperature eggs to prevent them from scrambling when mixed with hot pasta.",
+        "icon": "🥚"
+      },
+      {
+        "number": 4,
+        "instruction": "Drain pasta and add to the pan with pancetta. Remove from heat.",
+        "tip": "Removing from heat is crucial - this prevents the eggs from scrambling.",
+        "icon": "🍝"
+      },
+      {
+        "number": 5,
+        "instruction": "Quickly add the egg mixture and toss vigorously, adding pasta water to create a creamy sauce.",
+        "tip": "The residual heat will cook the eggs gently. Keep tossing for a silky, glossy finish.",
+        "icon": "✨"
+      }
+    ]
+  },
+  "cookies": {
+    "title": "Chocolate Chip Cookies",
+    "image": "🍪",
+    "ingredients": [
+      "2¼ cups all-purpose flour",
+      "1 teaspoon baking soda",
+      "1 teaspoon salt",
+      "1 cup butter, softened",
+      "¾ cup granulated sugar",
+      "¾ cup brown sugar",
+      "2 large eggs",
+      "2 teaspoons vanilla extract",
+      "2 cups chocolate chips"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Preheat oven to 375°F. In a small bowl, combine flour, baking soda, and salt.",
+        "tip": "Make sure your oven is fully preheated for even baking.",
+        "icon": "🌡️"
+      },
+      {
+        "number": 2,
+        "instruction": "In a large bowl, beat softened butter with both sugars until creamy.",
+        "tip": "The butter should be soft but not melted - leave it at room temperature for 30 minutes.",
+        "icon": "🧈"
+      },
+      {
+        "number": 3,
+        "instruction": "Add eggs and vanilla extract to butter mixture and beat well.",
+        "tip": "Scrape down the sides of the bowl to ensure everything is well incorporated.",
+        "icon": "🥚"
+      },
+      {
+        "number": 4,
+        "instruction": "Gradually blend in the flour mixture, then stir in chocolate chips.",
+        "tip": "Don't overmix after adding flour - this can make cookies tough.",
+        "icon": "🍫"
+      },
+      {
+        "number": 5,
+        "instruction": "Drop rounded tablespoons of dough onto ungreased baking sheets. Bake for 9-11 minutes.",
+        "tip": "Cookies will look slightly underdone when you remove them - they'll firm up as they cool.",
+        "icon": "🍪"
+      }
+    ]
+  },
+  "tacos": {
+    "title": "Beef Tacos",
+    "image": "🌮",
+    "ingredients": [
+      "1 lb ground beef",
+      "1 packet taco seasoning",
+      "8 taco shells",
+      "1 cup shredded lettuce",
+      "1 cup diced tomatoes",
+      "1 cup shredded cheese",
+      "Sour cream",
+      "Salsa"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Heat a large skillet over medium-high heat. Add ground beef and cook until browned, breaking it up with a spoon.",
+        "tip": "Drain excess fat after browning for healthier tacos.",
+        "icon": "🥩"
+      },
+      {
+        "number": 2,
+        "instruction": "Add taco seasoning and water according to packet directions. Simmer for 5 minutes.",
+        "tip": "Let the sauce thicken completely for maximum flavor.",
+        "icon": "🌶️"
+      },
+      {
+        "number": 3,
+        "instruction": "While meat simmers, prepare your toppings: shred lettuce, dice tomatoes, and grate cheese.",
+        "tip": "Cold, crisp vegetables provide a nice contrast to the warm meat.",
+        "icon": "🥬"
+      },
+      {
+        "number": 4,
+        "instruction": "Warm taco shells according to package directions, either in the oven or microwave.",
+        "tip": "Warming shells makes them more pliable and less likely to crack.",
+        "icon": "🌮"
+      },
+      {
+        "number": 5,
+        "instruction": "Fill each shell with seasoned beef, then top with lettuce, tomatoes, cheese, sour cream, and salsa.",
+        "tip": "Layer ingredients strategically: meat first, then cheese to melt, then cold toppings on top.",
+        "icon": "🎉"
+      }
+    ]
+  },
+  "stirfry": {
+    "title": "Vegetable Stir Fry",
+    "image": "🥘",
+    "ingredients": [
+      "2 cups mixed vegetables (broccoli, bell peppers, carrots)",
+      "2 tablespoons vegetable oil",
+      "3 cloves garlic, minced",
+      "1 tablespoon fresh ginger, grated",
+      "3 tablespoons soy sauce",
+      "1 tablespoon sesame oil",
+      "2 cups cooked rice",
+      "Sesame seeds for garnish"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Prepare all vegetables by washing and cutting into bite-sized pieces. Have everything ready before you start cooking.",
+        "tip": "Mise en place is crucial for stir fry - everything cooks fast once you start!",
+        "icon": "🥦"
+      },
+      {
+        "number": 2,
+        "instruction": "Heat a wok or large pan over high heat until very hot. Add vegetable oil and swirl to coat.",
+        "tip": "A hot wok is the secret to that restaurant-quality sear and texture.",
+        "icon": "🔥"
+      },
+      {
+        "number": 3,
+        "instruction": "Add garlic and ginger, stir fry for 30 seconds until fragrant.",
+        "tip": "Keep stirring constantly to prevent burning - aromatics cook very quickly.",
+        "icon": "🧄"
+      },
+      {
+        "number": 4,
+        "instruction": "Add vegetables starting with the hardest ones first (carrots, broccoli). Stir fry for 3-4 minutes.",
+        "tip": "Add softer vegetables like bell peppers in the last minute for best texture.",
+        "icon": "🥕"
+      },
+      {
+        "number": 5,
+        "instruction": "Add soy sauce and sesame oil, toss well. Serve over rice and garnish with sesame seeds.",
+        "tip": "The sauce will steam and create a delicious glaze - don't add too much liquid.",
+        "icon": "🍚"
+      }
+    ]
+  },
+  "smoothie": {
+    "title": "Berry Smoothie Bowl",
+    "image": "🥤",
+    "ingredients": [
+      "2 cups frozen mixed berries",
+      "1 banana",
+      "½ cup Greek yogurt",
+      "¼ cup milk",
+      "1 tablespoon honey",
+      "Granola for topping",
+      "Fresh fruit for topping",
+      "Chia seeds"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Add frozen berries, banana, yogurt, milk, and honey to a high-powered blender.",
+        "tip": "Use frozen fruit for a thick, ice-cream like consistency without ice.",
+        "icon": "🫐"
+      },
+      {
+        "number": 2,
+        "instruction": "Blend on high speed until smooth and thick, stopping to scrape down sides as needed.",
+        "tip": "Add liquid gradually - you want it thick enough to eat with a spoon!",
+        "icon": "🌀"
+      },
+      {
+        "number": 3,
+        "instruction": "Pour the smoothie into a bowl - it should be thick enough to support toppings.",
+        "tip": "If too thin, add more frozen fruit and blend again.",
+        "icon": "🥣"
+      },
+      {
+        "number": 4,
+        "instruction": "Arrange toppings in sections: granola on one side, fresh fruit, and chia seeds.",
+        "tip": "Get creative with your toppings - nuts, coconut flakes, and cocoa nibs work great!",
+        "icon": "🍓"
+      },
+      {
+        "number": 5,
+        "instruction": "Serve immediately while cold and enjoy with a spoon.",
+        "tip": "Smoothie bowls are best eaten right away before they melt and lose their thick texture.",
+        "icon": "🥄"
+      }
+    ]
+  },
+  "scrambledeggs": {
+    "title": "Perfect Scrambled Eggs",
+    "image": "🍳",
+    "ingredients": [
+      "3 large eggs",
+      "2 tablespoons milk or cream",
+      "1 tablespoon butter",
+      "Salt to taste",
+      "Black pepper to taste",
+      "Fresh chives or parsley (optional)"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "instruction": "Crack eggs into a bowl and add milk. Whisk vigorously until well combined and slightly frothy.",
+        "tip": "Whisking incorporates air for fluffier eggs. Don't skip this step!",
+        "icon": "🥚"
+      },
+      {
+        "number": 2,
+        "instruction": "Heat a non-stick pan over medium-low heat and add butter. Let it melt and coat the pan.",
+        "tip": "Low heat is key! High heat makes eggs rubbery. Patience pays off here.",
+        "icon": "🧈"
+      },
+      {
+        "number": 3,
+        "instruction": "Pour in the egg mixture. Wait 20 seconds, then gently push eggs from edges to center with a spatula.",
+        "tip": "Use a silicone spatula and make slow, gentle movements. Don't constantly stir.",
+        "icon": "🥄"
+      },
+      {
+        "number": 4,
+        "instruction": "Continue gently folding eggs every 10-15 seconds. Remove from heat when still slightly wet.",
+        "tip": "Eggs continue cooking off heat. Remove them when they're 80% done for perfect creaminess.",
+        "icon": "🍳"
+      },
+      {
+        "number": 5,
+        "instruction": "Season with salt and pepper. Garnish with fresh herbs if desired. Serve immediately.",
+        "tip": "Salt at the end to prevent eggs from getting watery. Enjoy while hot and creamy!",
+        "icon": "🌿"
+      }
+    ]
+  }
+}
