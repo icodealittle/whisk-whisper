@@ -27,7 +27,7 @@ whisk-whisper/
 3. Create a `js` folder → Copy `app.js` inside  
 4. Create a `data` folder → Copy `recipes.json` inside
 
-**Git Clone** 
+**Git Clone:** 
 
 ```bash
 git clone https://github.com/icodealittle/whisk-whisper.git
@@ -113,23 +113,6 @@ Then open: **http://localhost:3000**
 
 ---
 
-## 🐛 Troubleshooting
-
-**Problem: Recipes not showing**
-- Make sure `recipes.json` is in the `data/` folder
-- Check browser console (F12) for errors
-
-**Problem: Voice not working**
-- Use Chrome or Edge browser
-- Must be on `localhost` or `https://`
-- Allow microphone permission when prompted
-
-**Problem: CSS not loading**
-- Verify folder structure matches above
-- Make sure you're using a local server (not opening file directly)
-
----
-
 ## 📱 Features
 
 - 🎙️ **Voice Control** - Hands-free cooking
@@ -139,14 +122,5 @@ Then open: **http://localhost:3000**
 - ✅ **Progress Tracking** - Know where you are in the recipe
 
 ---
-
-## 🎉 That's It!
-
-You're ready to cook hands-free! Select a recipe and start cooking.
-
-**Need help?** Check the console (F12) for error messages.
-
----
-
 **Version:** 23  
 **Updated:** 2025
