@@ -1,3 +1,6 @@
+/* ================================================================
+   Whisk & Whisper v27 — Floating Glow Mic + Tip Enhancements
+================================================================= */
 * {
     margin: 0;
     padding: 0;
@@ -12,13 +15,13 @@ body {
     color: #333;
 }
 
+/* ==================== Container + Header ==================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     transition: box-shadow 0.3s ease;
 }
 
-/* NEW FEATURE: Glowing border when listening */
 .container.listening-active {
     box-shadow: 0 0 30px 5px rgba(102, 126, 234, 0.6);
     animation: listeningGlow 2s infinite;
@@ -53,6 +56,7 @@ h1 {
     opacity: 0.9;
 }
 
+/* ==================== Status Bar ==================== */
 .status-bar {
     background: white;
     padding: 15px 20px;
@@ -99,6 +103,7 @@ h1 {
     }
 }
 
+/* ==================== Layout + Cards ==================== */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -135,6 +140,7 @@ select:focus {
     border-color: #667eea;
 }
 
+/* ==================== Ingredients ==================== */
 .ingredients-list {
     list-style: none;
 }
@@ -147,6 +153,7 @@ select:focus {
     border-left: 3px solid #10b981;
 }
 
+/* ==================== Step Display ==================== */
 .step-display {
     min-height: 300px;
 }
@@ -175,6 +182,19 @@ select:focus {
     line-height: 1.8;
     margin-bottom: 20px;
     color: #1f2937;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .step-icon {
@@ -189,12 +209,21 @@ select:focus {
     margin: 20px 0;
 }
 
+/* ==================== Tip Section ==================== */
 .tip-section {
     background: #fef3c7;
     padding: 15px;
     border-radius: 8px;
     border-left: 4px solid #f59e0b;
     margin-top: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.tip-section.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .tip-section h3 {
@@ -208,6 +237,7 @@ select:focus {
     line-height: 1.6;
 }
 
+/* ==================== Controls ==================== */
 .controls {
     display: flex;
     gap: 10px;
@@ -265,139 +295,104 @@ button:disabled {
     cursor: not-allowed;
 }
 
-button:disabled:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.voice-modal {
-    display: none;
+/* ==================== Floating Glow Mic ==================== */
+/* ==================== Subtle Glow Light (Reactive AI Pulse) ==================== */
+#listeningIndicator {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-}
-
-.voice-modal.active {
-    display: flex;
-}
-
-.voice-modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-}
-
-.pulse-circle {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 20px;
+    bottom: 30px;
+    right: 30px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: #667eea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: pulseGrow 1.5s infinite;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 40%, rgba(118, 75, 162, 0.08) 100%);
+    box-shadow: 0 0 0 rgba(102, 126, 234, 0);
+    opacity: 0;
+    z-index: 1100;
+    pointer-events: none;
+    transition: all 0.6s ease;
 }
 
-@keyframes pulseGrow {
+/* ✨ Listening (Soft Golden Pulse) */
+#listeningIndicator.listening {
+    background: radial-gradient(circle, rgba(255, 225, 90, 0.6) 35%, rgba(255, 200, 0, 0.3) 80%);
+    box-shadow: 0 0 18px 6px rgba(255, 225, 90, 0.6);
+    opacity: 1;
+    animation: listeningPulse 2.5s infinite ease-in-out;
+}
+
+/* 💬 Speaking (Calm Blue Glow) */
+#listeningIndicator.speaking {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 30%, rgba(37, 99, 235, 0.25) 80%);
+    box-shadow: 0 0 25px 8px rgba(59, 130, 246, 0.7);
+    opacity: 1;
+    animation: speakingPulse 2s infinite ease-in-out;
+}
+
+/* ❤️ Reacting to User Voice (Faster heartbeat pulse) */
+#listeningIndicator.responding {
+    background: radial-gradient(circle, rgba(255, 130, 80, 0.6) 35%, rgba(255, 100, 40, 0.3) 80%);
+    box-shadow: 0 0 25px 10px rgba(255, 130, 80, 0.7);
+    opacity: 1;
+    animation: respondingPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes listeningPulse {
 
     0%,
     100% {
-        transform: scale(1);
-        opacity: 1;
+        box-shadow: 0 0 12px 4px rgba(255, 225, 90, 0.4);
     }
 
     50% {
-        transform: scale(1.1);
-        opacity: 0.8;
+        box-shadow: 0 0 25px 10px rgba(255, 225, 90, 0.9);
     }
 }
 
-.pulse-circle::before {
-    content: '🎤';
-    font-size: 3rem;
+@keyframes speakingPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 35px 14px rgba(37, 99, 235, 0.9);
+    }
 }
 
-.voice-modal h3 {
-    color: #667eea;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
+@keyframes respondingPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 25px 10px rgba(255, 130, 80, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 40px 18px rgba(255, 100, 40, 1);
+    }
 }
 
-.voice-modal p {
-    color: #6b7280;
-    margin-bottom: 20px;
-}
-
-.permission-modal {
-    display: none;
+/* ==================== Toast Message ==================== */
+.toast {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1001;
-    align-items: center;
-    justify-content: center;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(25, 25, 25, 0.9);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
 }
 
-.permission-modal.active {
-    display: flex;
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.permission-modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 450px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.permission-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
-
-.permission-modal h3 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.permission-modal p {
-    color: #6b7280;
-    margin-bottom: 25px;
-    line-height: 1.6;
-}
-
-.permission-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.empty-state {
-    text-align: center;
-    color: #9ca3af;
-    padding: 40px 20px;
-}
-
-.empty-state-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
-
-/* NEW FEATURE: Completion message styling */
+/* ==================== Completion ==================== */
 .completion-message {
     text-align: center;
     padding: 40px 20px;
@@ -436,6 +431,7 @@ button:disabled:hover {
     font-size: 1.2rem;
 }
 
+/* ==================== Responsiveness ==================== */
 @media (max-width: 768px) {
     .main-content {
         grid-template-columns: 1fr;
@@ -458,101 +454,63 @@ button:disabled:hover {
     display: none;
 }
 
-/* ==================== Ingredient Confirm Modal (Themed + Animated) ==================== */
-.fade-modal {
+/* ==================== Ingredient Confirm Bottom Bar ==================== */
+.ingredient-confirm-bar {
     position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0);
-    opacity: 0;
-    pointer-events: none;
-    transition: background 0.35s ease, opacity 0.35s ease;
-    z-index: 1002;
-}
-
-.fade-modal.active {
-    background: rgba(0, 0, 0, 0.6);
-    opacity: 1;
-    pointer-events: all;
-}
-
-.fade-modal-content {
-    background: white;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 420px;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90%;
-    padding: 0;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
-    transform: translateY(20px);
+    max-width: 500px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
     opacity: 0;
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    transition: all 0.4s ease;
+    z-index: 1050;
 }
 
-.fade-modal.active .fade-modal-content {
-    transform: translateY(0);
+.ingredient-confirm-bar.active {
+    bottom: 20px;
     opacity: 1;
 }
 
-/* Gradient header */
-.fade-modal-content h3 {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    margin: 0;
-    padding: 18px 20px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    border-radius: 20px 20px 0 0;
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+.ingredient-confirm-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
 }
 
-.fade-modal-content p {
-    color: #4b5563;
-    padding: 25px 20px 10px 20px;
+.confirm-icon {
+    font-size: 1.5rem;
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+.confirm-text {
+    flex-grow: 1;
+}
+
+.confirm-text strong {
+    display: block;
+    color: #111827;
     font-size: 1rem;
-    line-height: 1.5;
 }
 
-/* Themed confirm button */
-.fade-modal-content .btn-primary {
-    background: #10b981;
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    margin: 20px 0 25px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+.confirm-text p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
-.fade-modal-content .btn-primary:hover {
-    background: #059669;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
-    transform: translateY(-2px);
-}
-
-/* Optional mobile tweak */
-@media (max-width: 480px) {
-    .fade-modal-content {
-        width: 95%;
-        border-radius: 15px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-
-    .fade-modal-content h3 {
-        font-size: 1.2rem;
-        padding: 14px;
-    }
-
-    .fade-modal-content .btn-primary {
-        width: 100%;
-        font-size: 1.05rem;
-    }
+.ingredient-confirm-bar .btn-primary {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    flex-shrink: 0;
 }

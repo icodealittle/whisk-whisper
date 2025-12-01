@@ -1,418 +1,8 @@
-// // Whisk & Whisper v23 — Modular Edition (Final Stable + Voice Fixes)
+// =============================================================
+// Whisk & Whisper v27 — Natural Flow + Reactive Glow Fix
+// =============================================================
 
-// let recipes = {};
-// let currentRecipe = null;
-// let currentStep = 0;
-// let recognition = null;
-// let isSpeaking = false;
-
-// let micPermissionGranted = false;
-// let cookingSessionStarted = false;
-// let ingredientsConfirmed = false;
-// let waitingForConfirmation = false;
-// let confirmationTimeout = null;
-
-// // ===================== LOAD RECIPES THEN INIT ===================== //
-// fetch("../data/recipes.json")
-//   .then((response) => {
-//     if (!response.ok) throw new Error("Failed to load recipes.json");
-//     return response.json();
-//   })
-//   .then((data) => {
-//     recipes = data;
-//     console.log("📖 Recipes loaded:", Object.keys(recipes));
-//     initApp();
-//   })
-//   .catch((err) => console.error("❌ Error loading recipes:", err));
-
-// function initApp() {
-//   console.log("✅ Whisk & Whisper initialized");
-//   checkVoiceSupport();
-//   setupEventListeners();
-//   showEmptyState();
-// }
-
-// // ===================== EVENT LISTENERS ===================== //
-// function setupEventListeners() {
-//   const recipeSelect = document.getElementById("recipeSelect");
-//   if (recipeSelect) {
-//     recipeSelect.addEventListener("change", selectRecipe);
-//   }
-// }
-
-// // ===================== RECIPE SELECTION ===================== //
-// function selectRecipe(e) {
-//   const recipeKey = e.target.value;
-//   if (!recipeKey) {
-//     currentRecipe = null;
-//     document.getElementById("ingredientsSection").classList.add("hidden");
-//     showEmptyState();
-//     return;
-//   }
-
-//   currentRecipe = recipes[recipeKey];
-//   currentStep = 0;
-//   cookingSessionStarted = false;
-//   ingredientsConfirmed = false;
-//   waitingForConfirmation = false;
-//   if (confirmationTimeout) clearTimeout(confirmationTimeout);
-
-//   displayIngredients();
-//   displayCookingInterface();
-// }
-
-// // ===================== DISPLAY SECTIONS ===================== //
-// function displayIngredients() {
-//   const ingredientsList = document.getElementById("ingredientsList");
-//   ingredientsList.innerHTML = "";
-
-//   currentRecipe.ingredients.forEach((ingredient) => {
-//     const li = document.createElement("li");
-//     li.textContent = ingredient;
-//     ingredientsList.appendChild(li);
-//   });
-
-//   document.getElementById("ingredientsSection").classList.remove("hidden");
-// }
-
-// function displayCookingInterface() {
-//   const stepDisplay = document.getElementById("stepDisplay");
-//   const step = currentRecipe.steps[0];
-
-//   stepDisplay.innerHTML = `
-//     <div class="step-display">
-//       <div class="recipe-image">${currentRecipe.image}</div>
-//       <div class="step-header">
-//         <div class="step-number" id="stepNumber">Step 1</div>
-//         <div class="progress-text" id="progressText">1 of ${currentRecipe.steps.length}</div>
-//       </div>
-//       <div class="step-icon" id="stepIcon">${step.icon}</div>
-//       <div class="step-content" id="stepContent">${step.instruction}</div>
-//       <div class="tip-section hidden" id="tipSection">
-//         <h3>💡 Pro Tip</h3>
-//         <p id="tipContent"></p>
-//       </div>
-//     </div>
-//   `;
-
-//   appendControls(stepDisplay);
-// }
-
-// function appendControls(container) {
-//   const controls = document.createElement("div");
-//   controls.className = "controls";
-//   controls.innerHTML = `
-//     <button class="btn-primary" onclick="startCooking()">Start Cooking</button>
-//     <button class="btn-secondary" onclick="requestMicPermission()">🎤 Voice Control</button>
-//     <button class="btn-outline" onclick="previousStep()">← Previous</button>
-//     <button class="btn-outline" onclick="repeatStep()">🔄 Repeat</button>
-//     <button class="btn-outline" onclick="showTip()">💡 Tip</button>
-//     <button class="btn-outline" onclick="nextStep()">Next →</button>
-//   `;
-//   container.appendChild(controls);
-// }
-
-// function showEmptyState() {
-//   const stepDisplay = document.getElementById("stepDisplay");
-//   stepDisplay.innerHTML = `
-//     <div class="empty-state">
-//       <div class="empty-state-icon">👨‍🍳</div>
-//       <h3>Select a recipe to get started!</h3>
-//       <p>Choose from the dropdown and start cooking with voice commands.</p>
-//     </div>
-//   `;
-// }
-
-// // ===================== START COOKING FLOW ===================== //
-// function startCooking() {
-//   if (!currentRecipe) {
-//     speak("Please select a recipe first.");
-//     return;
-//   }
-
-//   if (!cookingSessionStarted) {
-//     cookingSessionStarted = true;
-//     speak("Before we begin, let me make sure you have all the ingredients.");
-//     readIngredientsAloud();
-//   } else {
-//     speak("You are already cooking!");
-//   }
-// }
-
-// // ===================== VOICE CONTROL ===================== //
-// function checkVoiceSupport() {
-//   const supportDiv = document.getElementById("voiceSupport");
-//   if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
-//     supportDiv.innerHTML =
-//       '<span style="color: #10b981;">✓ Voice Control Available</span>';
-//     initSpeechRecognition();
-//   } else {
-//     supportDiv.innerHTML =
-//       '<span style="color: #ef4444;">✗ Voice Control Not Supported</span>';
-//   }
-// }
-
-// function initSpeechRecognition() {
-//   recognition = new webkitSpeechRecognition();
-//   recognition.continuous = true; // Continuous listening enabled
-//   recognition.interimResults = false;
-//   recognition.lang = "en-US";
-
-//   recognition.onresult = (event) => {
-//     const command = event.results[event.results.length - 1][0].transcript
-//       .toLowerCase()
-//       .trim();
-//     console.log("🎤 Voice command:", command);
-//     handleVoiceCommand(command);
-//   };
-
-//   recognition.onerror = (event) => {
-//     console.error("Speech recognition error:", event.error);
-//     updateStatus("ready");
-//   };
-// }
-
-// function requestMicPermission() {
-//   if (!recognition) {
-//     alert("Voice control is not supported in this browser.");
-//     return;
-//   }
-//   if (!micPermissionGranted) {
-//     document.getElementById("permissionModal").classList.add("active");
-//   } else {
-//     startVoiceControl();
-//   }
-// }
-
-// function confirmMicPermission() {
-//   micPermissionGranted = true;
-//   closePermissionModal();
-//   startVoiceControl();
-// }
-
-// function closePermissionModal() {
-//   document.getElementById("permissionModal").classList.remove("active");
-// }
-
-// function startVoiceControl() {
-//   if (!recognition) {
-//     alert("Voice control not supported.");
-//     return;
-//   }
-
-//   document.getElementById("voiceModal").classList.add("active");
-//   document.querySelector(".container").classList.add("listening-active");
-//   updateStatus("listening");
-//   recognition.start();
-// }
-
-// function stopVoiceControl() {
-//   if (recognition) recognition.stop();
-//   document.getElementById("voiceModal").classList.remove("active");
-//   document.querySelector(".container").classList.remove("listening-active");
-//   updateStatus("ready");
-
-//   if (waitingForConfirmation && confirmationTimeout) {
-//     clearTimeout(confirmationTimeout);
-//     waitingForConfirmation = false;
-//   }
-// }
-
-// // ===================== VOICE COMMANDS ===================== //
-// function handleVoiceCommand(command) {
-//   if (!cookingSessionStarted) {
-//     if (command.includes("start cooking") || command.includes("start")) {
-//       startCooking();
-//       return;
-//     }
-//     speak("Say 'start cooking' to begin.");
-//     return;
-//   }
-
-//   if (waitingForConfirmation) {
-//     clearTimeout(confirmationTimeout);
-
-//     if (
-//       ["yes", "go ahead", "move forward", "continue", "start"].some((kw) =>
-//         command.includes(kw)
-//       )
-//     ) {
-//       waitingForConfirmation = false;
-//       ingredientsConfirmed = true;
-//       speak("Great! Let's begin with step one.");
-//       readStep();
-//       return;
-//     } else if (command.includes("no")) {
-//       waitingForConfirmation = false;
-//       speak("Would you like me to repeat the ingredients?");
-//       return;
-//     } else if (command.includes("repeat")) {
-//       readIngredientsAloud();
-//       return;
-//     }
-//   }
-
-//   if (!ingredientsConfirmed) {
-//     speak("Please confirm the ingredients first.");
-//     return;
-//   }
-
-//   if (command.includes("next")) nextStep();
-//   else if (command.includes("previous") || command.includes("back"))
-//     previousStep();
-//   else if (command.includes("repeat") || command.includes("again"))
-//     repeatStep();
-//   else if (command.includes("tip") || command.includes("hint")) showTip();
-// }
-
-// // ===================== SPEECH SYNTHESIS ===================== //
-// function speak(text) {
-//   if (isSpeaking) window.speechSynthesis.cancel();
-
-//   const utterance = new SpeechSynthesisUtterance(text);
-//   utterance.rate = 0.95;
-//   utterance.pitch = 1;
-
-//   utterance.onstart = () => {
-//     isSpeaking = true;
-//     updateStatus("speaking");
-//     if (recognition) recognition.stop(); // prevent overlap
-//   };
-
-//   utterance.onend = () => {
-//     isSpeaking = false;
-//     updateStatus("listening");
-//     // Resume listening automatically
-//     if (micPermissionGranted && recognition) {
-//       setTimeout(() => recognition.start(), 500);
-//     }
-//   };
-
-//   window.speechSynthesis.speak(utterance);
-// }
-
-// // ===================== COOKING STEPS ===================== //
-// function readIngredientsAloud() {
-//   if (!currentRecipe) return;
-//   let ingredientsText =
-//     "Before we begin, let me make sure you have all the ingredients. ";
-//   currentRecipe.ingredients.forEach((ingredient, i) => {
-//     ingredientsText += `Item ${i + 1}: ${ingredient}. `;
-//   });
-//   ingredientsText += "Do you want to move forward?";
-
-//   waitingForConfirmation = true;
-//   speak(ingredientsText);
-
-//   if (confirmationTimeout) clearTimeout(confirmationTimeout);
-//   confirmationTimeout = setTimeout(() => {
-//     if (waitingForConfirmation) {
-//       speak("Would you like me to repeat the ingredients?");
-//     }
-//   }, 10000);
-// }
-
-// function readStep() {
-//   if (currentStep < currentRecipe.steps.length) {
-//     const step = currentRecipe.steps[currentStep];
-//     updateStepDisplay(step);
-//     speak(`Step ${currentStep + 1}: ${step.instruction}`);
-//   } else {
-//     showCompletionMessage();
-//   }
-// }
-
-// function nextStep() {
-//   if (currentStep < currentRecipe.steps.length - 1) {
-//     currentStep++;
-//     readStep();
-//   } else {
-//     showCompletionMessage();
-//   }
-// }
-
-// function previousStep() {
-//   if (currentStep > 0) {
-//     currentStep--;
-//     readStep();
-//   } else {
-//     speak("You are already at the first step.");
-//   }
-// }
-
-// function repeatStep() {
-//   readStep();
-// }
-
-// function showTip() {
-//   const tip = currentRecipe.steps[currentStep].tip;
-//   document.getElementById("tipContent").textContent = tip;
-//   document.getElementById("tipSection").classList.remove("hidden");
-//   speak("Here's a tip: " + tip);
-// }
-
-// // ===================== UPDATE STEP DISPLAY ===================== //
-// function updateStepDisplay(step) {
-//   const stepDisplay = document.getElementById("stepDisplay");
-//   stepDisplay.innerHTML = `
-//     <div class="step-header">
-//       <div class="step-number">Step ${currentStep + 1}</div>
-//       <div class="progress-text">of ${currentRecipe.steps.length}</div>
-//     </div>
-//     <div class="step-content">${step.instruction}</div>
-//     <div class="step-icon">${step.icon}</div>
-//     <div class="tip-section">
-//       <h3>Tip:</h3>
-//       <p>${step.tip}</p>
-//     </div>
-//   `;
-//   appendControls(stepDisplay);
-// }
-
-// function showCompletionMessage() {
-//   const stepDisplay = document.getElementById("stepDisplay");
-//   stepDisplay.innerHTML = `
-//     <div class="completion-message">
-//       <div class="completion-icon">🎉</div>
-//       <h2>Congratulations!</h2>
-//       <p>You completed ${currentRecipe.title}. Enjoy your meal!</p>
-//     </div>
-//   `;
-//   speak(
-//     "Congratulations, you completed the cooking instruction. Enjoy your meal!"
-//   );
-// }
-
-// // ===================== STATUS BAR ===================== //
-// function updateStatus(status) {
-//   const dot = document.getElementById("statusDot");
-//   const text = document.getElementById("statusText");
-//   dot.className = "status-dot";
-
-//   switch (status) {
-//     case "listening":
-//       dot.classList.add("listening");
-//       text.textContent = "Listening";
-//       break;
-//     case "speaking":
-//       dot.classList.add("speaking");
-//       text.textContent = "Speaking";
-//       break;
-//     default:
-//       text.textContent = "Ready";
-//   }
-// }
-
-// // ===================== EXPORT FUNCTIONS TO WINDOW ===================== //
-// window.startCooking = startCooking;
-// window.requestMicPermission = requestMicPermission;
-// window.closePermissionModal = closePermissionModal;
-// window.confirmMicPermission = confirmMicPermission;
-// window.stopVoiceControl = stopVoiceControl;
-// window.nextStep = nextStep;
-// window.previousStep = previousStep;
-// window.repeatStep = repeatStep;
-// window.showTip = showTip;
+const API_BASE = "http://localhost:3000";
 
 let recipes = {};
 let currentRecipe = null;
@@ -484,7 +74,6 @@ function displayIngredients() {
 function displayCookingInterface() {
   const stepDisplay = document.getElementById("stepDisplay");
   const step = currentRecipe.steps[0];
-
   stepDisplay.innerHTML = `
     <div class="step-display">
       <div class="recipe-image">${currentRecipe.image}</div>
@@ -538,38 +127,44 @@ function startCooking() {
 
   if (!cookingSessionStarted) {
     cookingSessionStarted = true;
-    speak("Before we begin, let me make sure you have all the ingredients.");
-    readIngredientsAloud();
+    ingredientsConfirmed = false;
+    waitingForConfirmation = true;
+
+    speak("Before we begin, let's make sure you have everything you need for this recipe.", () => {
+      readIngredientsAloud();
+    });
   } else {
-    speak("You are already cooking!");
+    speak("You're already cooking this recipe.");
   }
 }
 
-// ===================== INGREDIENT CONFIRM POPUP ===================== //
+// ===================== INGREDIENT CONFIRMATION ===================== //
 function readIngredientsAloud() {
   if (!currentRecipe) return;
 
-  let ingredientsText =
-    "Before we begin, let me make sure you have all the ingredients. ";
+  let ingredientsText = "Here's what you'll need: ";
   currentRecipe.ingredients.forEach((ingredient, i) => {
-    ingredientsText += `Item ${i + 1}: ${ingredient}. `;
+    ingredientsText += `Ingredient ${i + 1}: ${ingredient}. `;
   });
-  ingredientsText +=
-    "Please review the ingredients, then press confirm when you're ready to start cooking.";
+  ingredientsText += "Once you've checked everything, press confirm to begin.";
 
-  waitingForConfirmation = true;
-  speak(ingredientsText);
-  showIngredientConfirmPopup();
+  speak(ingredientsText, () => showIngredientConfirmPopup());
 }
 
 function showIngredientConfirmPopup() {
+  const existing = document.getElementById("ingredientConfirmModal");
+  if (existing) existing.remove();
+
   const modal = document.createElement("div");
   modal.id = "ingredientConfirmModal";
-  modal.className = "fade-modal";
+  modal.className = "ingredient-confirm-bar";
   modal.innerHTML = `
-    <div class="fade-modal-content">
-      <h3>✅ Ingredients Reviewed</h3>
-      <p>Click below to confirm and start Step 1.</p>
+    <div class="ingredient-confirm-content">
+      <div class="confirm-icon">✅</div>
+      <div class="confirm-text">
+        <strong>Ingredients Reviewed</strong>
+        <p>Click below to confirm and start Step 1.</p>
+      </div>
       <button class="btn-primary" id="confirmIngredientsBtn">Confirm</button>
     </div>
   `;
@@ -577,30 +172,33 @@ function showIngredientConfirmPopup() {
 
   requestAnimationFrame(() => modal.classList.add("active"));
 
-  document
-    .getElementById("confirmIngredientsBtn")
-    .addEventListener("click", () => {
-      modal.classList.remove("active");
-      setTimeout(() => {
-        modal.remove();
-        waitingForConfirmation = false;
-        ingredientsConfirmed = true;
-        speak("Great! Let's begin with step one.");
-        readStep();
-      }, 300);
-    });
+  document.getElementById("confirmIngredientsBtn").addEventListener("click", () => {
+    modal.classList.remove("active");
+    setTimeout(() => {
+      modal.remove();
+      waitingForConfirmation = false;
+      ingredientsConfirmed = true;
+      speak("Great! Let's begin with step one.", () => readStep());
+    }, 300);
+  });
+}
+
+// ===================== REACTIVE GLOW INDICATOR ===================== //
+const glowIndicator = document.getElementById("listeningIndicator");
+function setGlowState(state) {
+  if (!glowIndicator) return;
+  glowIndicator.classList.remove("listening", "speaking", "responding");
+  if (state) glowIndicator.classList.add(state);
 }
 
 // ===================== VOICE RECOGNITION ===================== //
 function checkVoiceSupport() {
   const supportDiv = document.getElementById("voiceSupport");
   if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
-    supportDiv.innerHTML =
-      '<span style="color: #10b981;">✓ Voice Control Available</span>';
+    supportDiv.innerHTML = '<span style="color: #10b981;">✓ Voice Control Available</span>';
     initSpeechRecognition();
   } else {
-    supportDiv.innerHTML =
-      '<span style="color: #ef4444;">✗ Voice Control Not Supported</span>';
+    supportDiv.innerHTML = '<span style="color: #ef4444;">✗ Voice Control Not Supported</span>';
   }
 }
 
@@ -611,13 +209,13 @@ function initSpeechRecognition() {
   recognition.lang = "en-US";
 
   recognition.onresult = (event) => {
-    const command = event.results[event.results.length - 1][0].transcript
-      .toLowerCase()
-      .trim();
+    const command = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
     console.log("🎤 Voice command:", command);
     handleVoiceCommand(command);
   };
 
+  recognition.onspeechstart = () => setGlowState("responding");
+  recognition.onspeechend = () => setGlowState("listening");
   recognition.onerror = (e) => console.error("Speech recognition error:", e.error);
 }
 
@@ -626,147 +224,179 @@ function requestMicPermission() {
     alert("Voice control is not supported in this browser.");
     return;
   }
-  if (!micPermissionGranted) {
-    document.getElementById("permissionModal").classList.add("active");
-  } else {
-    startVoiceControl();
-  }
-}
 
-function confirmMicPermission() {
-  micPermissionGranted = true;
-  document.getElementById("permissionModal").classList.remove("active");
-  startVoiceControl();
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(() => {
+      micPermissionGranted = true;
+      showToast("🎤 Voice control enabled!");
+      startVoiceControl();
+    })
+    .catch(() => alert("Microphone access denied. Please enable it in browser settings."));
 }
 
 function startVoiceControl() {
   if (!recognition) return;
-  document.getElementById("voiceModal").classList.add("active");
-  document.querySelector(".container").classList.add("listening-active");
   recognition.start();
+  setGlowState("listening");
 }
 
 function stopVoiceControl() {
   if (recognition) recognition.stop();
-  document.getElementById("voiceModal").classList.remove("active");
-  document.querySelector(".container").classList.remove("listening-active");
+  setGlowState(null);
 }
 
 // ===================== VOICE COMMAND HANDLING ===================== //
 function handleVoiceCommand(command) {
-  // Normalize the input
   command = command.toLowerCase().trim();
 
-  // 1️⃣ Voice "start" command before cooking begins
   if (!cookingSessionStarted && (command.includes("start cooking") || command === "start")) {
     cookingSessionStarted = true;
-    speak("Before we begin, let me make sure you have all the ingredients.");
-    readIngredientsAloud();
+    speak("Before we begin, let's make sure you have all the ingredients.", () => readIngredientsAloud());
     return;
   }
 
-  // 2️⃣ Voice "confirm" while ingredient popup is visible
   if (command.includes("confirm")) {
     const modal = document.getElementById("ingredientConfirmModal");
     if (modal) {
-      // Close modal and start step 1
       modal.classList.remove("active");
       setTimeout(() => {
         modal.remove();
         waitingForConfirmation = false;
         ingredientsConfirmed = true;
-        speak("Great! Let's begin with step one.");
-        readStep();
+        speak("Great! Let's begin with step one.", () => readStep());
       }, 300);
       return;
     }
   }
 
-  // 3️⃣ Require confirmation before continuing
   if (!ingredientsConfirmed) {
     speak("Please confirm your ingredients first.");
     return;
   }
 
-  // 4️⃣ Step navigation and actions
   if (command.includes("next")) {
-    nextStep();
+    speak("Got it, moving to the next step.", () => nextStep());
     return;
   }
 
   if (command.includes("previous") || command.includes("back")) {
-    previousStep();
+    speak("Going back to the previous step.", () => previousStep());
     return;
   }
 
   if (command.includes("repeat") || command.includes("again")) {
-    repeatStep();
+    speak("Repeating this step for you.", () => repeatStep());
     return;
   }
 
-  // 💡 Voice “Tip” or “Hint”
   if (command.includes("tip") || command.includes("hint")) {
-    console.log("🗣️ Tip command detected");
     showTip(true);
     return;
   }
 
-  // 🛑 Voice “Stop” to end session
   if (command.includes("stop")) {
     stopVoiceControl();
+    speak("Stopping voice control. You can continue manually.");
     return;
   }
 
-  // 🧠 Default fallback
   speak("Sorry, I didn't catch that. Try saying next, repeat, or tip.");
 }
 
-
 // ===================== SPEECH SYNTHESIS ===================== //
-function speak(text) {
-  if (isSpeaking) window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = 0.95;
-  utter.pitch = 1;
-  utter.onstart = () => {
-    isSpeaking = true;
-    if (recognition) recognition.stop();
-  };
-  utter.onend = () => {
-    isSpeaking = false;
-    if (micPermissionGranted && recognition)
-      setTimeout(() => recognition.start(), 400);
-  };
-  window.speechSynthesis.speak(utter);
+function disableControlsDuringSpeech(disabled = true) {
+  document.querySelectorAll("button").forEach((btn) => {
+    if (!btn.classList.contains("no-lock")) btn.disabled = disabled;
+  });
 }
 
-// ===================== STEPS CONTROL ===================== //
-function readStep() {
-  if (currentStep < currentRecipe.steps.length) {
-    const step = currentRecipe.steps[currentStep];
-    updateStepDisplay(step);
-    speak(`Step ${currentStep + 1}: ${step.instruction}`);
-  } else {
-    showCompletionMessage();
+async function speak(text, onComplete) {
+  const voice = "fable";
+  if (!text || text.trim() === "") return;
+  if (isSpeaking) return;
+
+  if (recognition) recognition.stop();
+  isSpeaking = true;
+  disableControlsDuringSpeech(true);
+  setGlowState("speaking");
+
+  try {
+    const response = await fetch(`${API_BASE}/api/speak`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, voice })
+    });
+
+    if (!response.ok) throw new Error("OpenAI voice unavailable");
+    const blob = await response.blob();
+    const audio = new Audio(URL.createObjectURL(blob));
+
+    audio.onended = () => {
+      isSpeaking = false;
+      disableControlsDuringSpeech(false);
+      if (onComplete) onComplete();
+      if (micPermissionGranted && recognition) setTimeout(() => recognition.start(), 800);
+      setGlowState("listening");
+    };
+
+    audio.play();
+  } catch (err) {
+    console.warn("🎙️ Fallback TTS used:", err);
+    if (isSpeaking) window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 1.05;
+    utter.pitch = 1.2;
+
+    utter.onend = () => {
+      isSpeaking = false;
+      disableControlsDuringSpeech(false);
+      if (onComplete) onComplete();
+      if (micPermissionGranted && recognition) setTimeout(() => recognition.start(), 800);
+      setGlowState("listening");
+    };
+
+    window.speechSynthesis.speak(utter);
   }
 }
+
+function readStep() {
+  if (!currentRecipe) return;
+  if (currentStep >= currentRecipe.steps.length) return showCompletionMessage();
+
+  const step = currentRecipe.steps[currentStep];
+  updateStepDisplay(step);
+
+  const intro = `Step ${currentStep + 1}.`;
+  const instruction = step.instruction;
+  const tipText =
+    step.tip && step.tip.trim() !== ""
+      ? `Here's a helpful tip: ${step.tip.trim()}`
+      : "";
+
+  // Speak in sequence with ~1s pause before the tip
+  speak(intro, () => {
+    speak(instruction, () => {
+      if (tipText) {
+        setTimeout(() => speak(tipText), 1000); // shorter, more natural delay
+      }
+    });
+  });
+}
+
 
 function nextStep() {
   if (currentStep < currentRecipe.steps.length - 1) {
     currentStep++;
     readStep();
-  } else {
-    showCompletionMessage();
-  }
+  } else showCompletionMessage();
 }
 
 function previousStep() {
   if (currentStep > 0) {
     currentStep--;
     readStep();
-  } else {
-    speak("You are already at the first step.");
-  }
+  } else speak("You are already at the first step.");
 }
 
 function repeatStep() {
@@ -774,36 +404,16 @@ function repeatStep() {
 }
 
 function showTip(forceSpeak = false) {
-  if (!currentRecipe || !currentRecipe.steps[currentStep]) {
-    speak("There is no tip available right now.");
-    return;
-  }
-
+  if (!currentRecipe || !currentRecipe.steps[currentStep]) return;
   const tip = currentRecipe.steps[currentStep].tip;
-
-  // Update on-screen UI
   const tipSection = document.getElementById("tipSection");
   const tipContent = document.getElementById("tipContent");
   if (tipSection && tipContent) {
     tipContent.textContent = tip;
     tipSection.classList.remove("hidden");
   }
-
-  // Always speak the tip aloud
   speak(`Here's a tip: ${tip}`);
-
-  // Restart recognition safely after speech ends
-  if (micPermissionGranted && recognition) {
-    setTimeout(() => {
-      try {
-        recognition.start();
-      } catch (err) {
-        console.warn("Speech recognition restart skipped:", err);
-      }
-    }, 1500); // give it enough breathing room
-  }
 }
-
 
 // ===================== UI UPDATE ===================== //
 function updateStepDisplay(step) {
@@ -823,6 +433,7 @@ function updateStepDisplay(step) {
   appendControls(stepDisplay);
 }
 
+// ===================== COMPLETION ===================== //
 function showCompletionMessage() {
   const stepDisplay = document.getElementById("stepDisplay");
   stepDisplay.innerHTML = `
@@ -832,15 +443,20 @@ function showCompletionMessage() {
       <p>You completed ${currentRecipe.title}. Enjoy your meal!</p>
     </div>
   `;
-  speak(
-    "Congratulations, you completed the cooking instruction. Enjoy your meal!"
-  );
+  speak("Congratulations! You've completed this recipe. Enjoy your meal!");
 }
 
-// ===================== GLOBAL EXPORT ===================== //
+// ===================== TOAST ===================== //
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+// ===================== EXPORT ===================== //
 window.startCooking = startCooking;
 window.requestMicPermission = requestMicPermission;
-window.confirmMicPermission = confirmMicPermission;
 window.stopVoiceControl = stopVoiceControl;
 window.nextStep = nextStep;
 window.previousStep = previousStep;

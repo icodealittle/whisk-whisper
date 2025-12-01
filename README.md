@@ -1,83 +1,93 @@
 # 🍳 Whisk & Whisper - Quick Start Guide
 
-> Your hands-free voice-controlled cooking assistant
+- Version: v27+ (Natural Flow + Reactive Glow Edition)
+- Tech Stack: HTML, CSS, JavaScript (Frontend) + Node.js/Express (Backend for OpenAI Voice)
 
----
 
-## 📥 Download & Setup
-
-### Step 1: Download the Files
-
-Create a folder called `whisk-whisper` and add these files:
+## Project Structure
 
 ```
 whisk-whisper/
-├── index.html
 ├── css/
-│   └── style.css
+│   └── style.css              # UI styling (cards, buttons, glow effect)
+├── data/
+│   └── recipes.json           # Recipe library
 ├── js/
-│   └── app.js
-└── data/
-    └── recipes.json
+│   └── app.js                 # Core front-end logic + voice control
+├── server/
+│   ├── node_modules/
+│   ├── index.js               # Node/Express server for OpenAI voice synthesis
+│   ├── package.json
+│   └── .env                   # API key for OpenAI
+├── index.html                 # Main web app interface
+├── README.md                  # (you’re reading this!)
+└── test.mp3                   # Sample audio output (for local testing)
 ```
 
-**Download each file:**
-1. Copy `index.html` from the artifacts
-2. Create a `css` folder → Copy `style.css` inside
-3. Create a `js` folder → Copy `app.js` inside  
-4. Create a `data` folder → Copy `recipes.json` inside
+## Setup Instructions
 
-**Git Clone:** 
+**Git Clone and Install:** 
 
 ```bash
-git clone https://github.com/icodealittle/whisk-whisper.git
+git clone https://github.com/your-username/whisk-whisper.git
+cd whisk-whisper/server
+npm install
 ```
-
-```bash
-cd whisk-whisper
-```
-
 ---
 
-## 🚀 Run the App
+**Create a .env File**
 
-### Option 1: VS Code Live Server (No Installation Needed!)
-
-1. Download and install [VS Code](https://code.visualstudio.com/) (free)
-2. Open `whisk-whisper` folder in VS Code
-3. Install "Live Server" extension (click Extensions icon → search "Live Server")
-4. Right-click `index.html` → **"Open with Live Server"**
-5. Opens automatically in your browser! ✨
-
----
-
-### Option 2: Python Server (If you have Python)
-
-**Check if Python is installed:**
-```bash
-python3 --version
-```
-
-If you see a version number, run:
-```bash
-python3 -m http.server 8080
-```
-
-Then open Chrome: **http://localhost:8080**
-
-**Don't have Python?** Download from [python.org](https://www.python.org/downloads/)
-
----
-
-### Option 3: Node.js (If you have Node installed)
+Inside the /server folder, add your OpenAI API key:
 
 ```bash
-npx serve
+OPENAI_API_KEY=sk-xxxxxx
+PORT=3000
 ```
 
-Then open: **http://localhost:3000**
+**Run the Backend**
 
----
+```bash
+cd server
+node index.js
+```
+
+You should see:
+```
+✅ Server running on http://localhost:3000
+🎙️ OpenAI voice endpoint ready: /api/speak
+```
+
+**Run the Frontend**
+
+***Option 1***
+
+Use Python’s Simple HTTP Server
+
+```
+cd ..
+python3 -m http.server 5500
+```
+
+Then open <http://localhost:5500>
+
+Your app should load at /index.html.
+
+***Option 2***
+
+Use Node’s built-in HTTP server (if you have Node but not Python)
+
+```
+npx http-server .
+```
+Then visit the URL it prints (usually <http://127.0.0.1:8080>).
+
+***Option 3***
+
+Use VS Code Live Server
+
+```
+Right-click on index.html → “Open with Live Server”
+```
 
 ## ✅ Quick Test
 
@@ -86,8 +96,6 @@ Then open: **http://localhost:3000**
 3. **Click "🎤 Voice Control"** → Grant microphone permission
 4. **Say "start"** → Should read ingredients aloud
 5. **Say "yes"** → Starts cooking instructions
-
----
 
 ## 🎤 Voice Commands
 
@@ -100,7 +108,6 @@ Then open: **http://localhost:3000**
 | **"repeat"** | Repeat current step |
 | **"tip"** | Hear cooking tip |
 
----
 
 ## 🌐 Browser Requirements
 
@@ -111,7 +118,6 @@ Then open: **http://localhost:3000**
 | ⚠️ **Safari** | Limited voice features |
 | ❌ **Firefox** | No voice support |
 
----
 
 ## 📱 Features
 
@@ -121,6 +127,6 @@ Then open: **http://localhost:3000**
 - 💡 **Cooking Tips** - Pro tips for every step
 - ✅ **Progress Tracking** - Know where you are in the recipe
 
----
-**Version:** 23  
+
+**Version:** 27  
 **Updated:** 2025
