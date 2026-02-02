@@ -1,4 +1,4 @@
-# 🍳 Whisk & Whisper - Quick Start Guide
+# Whisk & Whisper - Quick Start Guide
 
 - Version: v27+ (Natural Flow + Reactive Glow Edition)
 - Tech Stack: HTML, CSS, JavaScript (Frontend) + Node.js/Express (Backend for OpenAI Voice)
@@ -53,8 +53,8 @@ node index.js
 
 You should see:
 ```
-✅ Server running on http://localhost:3000
-🎙️ OpenAI voice endpoint ready: /api/speak
+Server running on http://localhost:3000
+OpenAI voice endpoint ready: /api/speak
 ```
 
 **Run the Frontend**
@@ -89,7 +89,7 @@ Use VS Code Live Server
 Right-click on index.html → “Open with Live Server”
 ```
 
-## ✅ Quick Test
+## Quick Test
 
 1. **Should see**: Purple gradient background with recipe dropdown
 2. **Select any recipe** → Ingredients appear on left
@@ -97,7 +97,7 @@ Right-click on index.html → “Open with Live Server”
 4. **Say "start"** → Should read ingredients aloud
 5. **Say "yes"** → Starts cooking instructions
 
-## 🎤 Voice Commands
+## Voice Commands
 
 | Command | Action |
 |---------|--------|
@@ -109,23 +109,23 @@ Right-click on index.html → “Open with Live Server”
 | **"tip"** | Hear cooking tip |
 
 
-## 🌐 Browser Requirements
+## Browser Requirements
 
 | Browser | Support |
 |---------|---------|
-| ✅ **Chrome** | Full support (recommended) |
-| ✅ **Edge** | Full support |
-| ⚠️ **Safari** | Limited voice features |
-| ❌ **Firefox** | No voice support |
+| **Chrome** | Full support (recommended) |
+| **Edge** | Full support |
+| **Safari** | Limited voice features |
+| **Firefox** | No voice support |
 
 
-## 📱 Features
+## Features
 
-- 🎙️ **Voice Control** - Hands-free cooking
-- 📖 **7 Recipes** - Pancakes, Pasta, Cookies, Tacos, Stir Fry, Smoothie Bowl, Scrambled Eggs
-- 🔊 **Text-to-Speech** - Reads instructions aloud
-- 💡 **Cooking Tips** - Pro tips for every step
-- ✅ **Progress Tracking** - Know where you are in the recipe
+- **Voice Control** - Hands-free cooking
+- **7 Recipes** - Pancakes, Pasta, Cookies, Tacos, Stir Fry, Smoothie Bowl, Scrambled Eggs
+- **Text-to-Speech** - Reads instructions aloud
+- **Cooking Tips** - Pro tips for every step
+- **Progress Tracking** - Know where you are in the recipe
 
 
 **Version:** 27  
